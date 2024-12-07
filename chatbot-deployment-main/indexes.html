@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlixChat</title>
+  <style>
+  :root {
+      --dark-bg: #1a1a1a;
+      --darker-bg: #151515;
+      --accent: #ff4455;
+      --shadow-dark: #000000;
+      --shadow-light: #2a2a2a;
+      --text: #ffffff;
+  }
+
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+  }
+
+  body {
+      background: var(--dark-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text);
+      min-height: 100vh;
+  }
+
+  .chat-container {
+      width: 90%;
+      max-width: 400px;
+      background: var(--darker-bg);
+      border-radius: 30px;
+      padding: 20px;
+      box-shadow: 8px 8px 15px var(--shadow-dark), -8px -8px 15px var(--shadow-light);
+  }
+
+  .chat-header {
+      text-align: center;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      background: var(--darker-bg);
+      box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .bot-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      background: var(--darker-bg);
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .status-dot {
+      width: 12px;
+      height: 12px;
+      background: #2ecc71;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      box-shadow: 0 0 10px #2ecc71;
+      animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+  }
+
+  .messages {
+      height: 400px;
+      overflow-y: auto;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      background: var(--darker-bg);
+      box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+  }
+
+  .message {
+      margin: 10px 0;
+      padding: 12px 18px;
+      border-radius: 15px;
+      max-width: 80%;
+      animation: messageSlide 0.3s ease;
+  }
+
+  @keyframes messageSlide {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+  }
+
+  .message.sent { 
+      margin-left: auto; 
+      background: var(--accent); 
+      color: white; 
+      text-align: right;
+  }
+
+  .message.received { 
+      background: #2a2a2a; 
+      color: var(--text);
+  }
+
+  .input-area { 
+      display: flex; 
+      gap: 10px; 
+  }
+
+  input[type="text"] { 
+      flex: 1; 
+      padding: 12px; 
+      border: none; 
+      border-radius: 15px; 
+      background: var(--dark-bg);
+      color: var(--text);
+      box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light); 
+  }
+
+  button { 
+      padding: 12px 25px; 
+      border: none; 
+      border-radius: 15px; 
+      background: var(--accent); 
+      color: white; 
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s; 
+  }
+
+  button:hover { 
+      transform: scale(1.05); 
+  }
+
+  button:active { 
+      transform: scale(0.95); 
+      box-shadow: 2px 2px 5px var(--shadow-dark), -2px -2px 5px var(--shadow-light); 
+  }
+
+  .typing-indicator {
+      display: flex;
+      gap: 5px;
+      padding: 10px 20px;
+      background: #2a2a2a;
+      border-radius: 20px;
+      width: fit-content;
+      margin: 10px 0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+  }
+
+  .typing-indicator.active {
+      opacity: 1;
+  }
+
+  .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--text);
+      border-radius: 50%;
+      animation: typingBounce 1s infinite;
+  }
+
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+  }
+  </style>
+</head>
+<body>
+<div class="chat-container">
+  <div class="chat-header">
+    <div class="bot-avatar">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="var(--accent)">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+      </svg>
+    </div>
+    <h2>FlixBot</h2>
+  </div>
+  <div class="messages" id="messages"></div>
+  <div class="typing-indicator" id="typing-indicator">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+  <div class="input-area">
+    <input type="text" id="messageInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+const messagesDiv = document.getElementById('messages');
+const messageInput = document.getElementById('messageInput');
+const typingIndicator = document.getElementById('typing-indicator');
+
+// Function to add a message to the chat UI
+function addMessage(text, type) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${type}`;
+  messageDiv.textContent = text;
+  messagesDiv.appendChild(messageDiv);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;  // Scroll to the latest message
+}
+
+// Function to show the typing indicator
+function showTypingIndicator() {
+  typingIndicator.classList.add('active');
+}
+
+// Function to hide the typing indicator
+function hideTypingIndicator() {
+  typingIndicator.classList.remove('active');
+}
+
+// Function to send the user’s message to the server and get a response
+// function sendMessage() {
+//   const message = messageInput.value.trim();
+//   if (message) {
+//     addMessage(message, 'sent');  // Show user's message
+//     messageInput.value = '';  // Clear the input field
+//     showTypingIndicator();  // Show "typing..." indicator
+
+//     // Simulate delay and fetch response
+//     setTimeout(() => {
+//       hideTypingIndicator();  // Hide typing indicator
+//       addMessage("I'm here to help! How can I assist you today?", 'received');
+//     }, 2000);
+//   }
+// }
+function sendMessage() {
+  const message = messageInput.value.trim();
+  if (message) {
+    addMessage(message, 'sent');  // Show user's message
+    messageInput.value = '';  // Clear the input field
+
+    // Show "typing..." indicator
+    // const typingIndicator = document.createElement('div');
+    // typingIndicator.className = 'message typing';
+    showTypingIndicator();
+    // typingIndicator.textContent = 'Typing...';
+    messagesDiv.appendChild(typingIndicator);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    // Simulate delay and fetch response
+    setTimeout(() => {
+      hideTypingIndicator();  // Remove typing indicator
+      fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: message })
+      })
+      .then(response => response.json())
+      .then(data => addMessage(data.response, 'received'))  // Show the chatbot's response
+      .catch(error => console.error('Error:', error));
+    }, 2000);  // 2-second delay
+  }
+}
+// Event listener for Enter key
+messageInput.addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    sendMessage();
+  }
+});
+</script>
+</body>
+</html>
