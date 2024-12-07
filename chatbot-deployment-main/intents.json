@@ -1,0 +1,183 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hello",
+        "Hey there",
+        "Greetings",
+        "Good morning",
+        "Good afternoon",
+        "Good evening",
+        "What's up?",
+        "How are you?"
+      ],
+      "responses": [
+        "Hello! How can I help you today?",
+        "Hi there! What’s on your mind?",
+        "Hey! Need assistance?",
+        "Good day! How can I make your day better?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "Goodbye",
+        "See you later",
+        "Catch you soon",
+        "Take care",
+        "I'm off",
+        "Later"
+      ],
+      "responses": [
+        "Goodbye! Have a great day ahead!",
+        "See you soon! Take care of yourself.",
+        "Farewell! Looking forward to our next chat."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thanks",
+        "Thank you",
+        "I appreciate it",
+        "Much obliged",
+        "You're a lifesaver",
+        "Thank's a lot!"
+      ],
+      "responses": [
+        "You're welcome!",
+        "Glad I could help!",
+        "Always here for you!",
+        "My pleasure!"
+      ]
+    },
+    {
+      "tag": "facts",
+      "patterns": [
+        "Tell me something interesting",
+        "Share a fact",
+        "Do you know any facts?",
+        "Give me a fun fact"
+      ],
+      "responses": [
+        "The Eiffel Tower can grow more than 6 inches during summer due to metal expansion.",
+        "Bananas are berries, but strawberries aren't!",
+        "Sharks existed before trees were a thing!"
+      ]
+    },
+    {
+      "tag": "user_info",
+      "patterns": [
+        "Tell me about myself",
+        "What do you know about me?",
+        "Who am I?",
+        "Do you remember my preferences?"
+      ],
+      "responses": [
+        "You prefer a dark theme with an orange primary color.",
+        "Your interests include Python, Animation, Football, Machine Learning, Fantasy, Musical, Other, and Tutorial.",
+        "You're working with video data, often saving it in CSV format. Anything else you'd like to update?"
+      ]
+    },
+    {
+      "tag": "jokes",
+      "patterns": [
+        "Tell me a joke",
+        "I need a laugh",
+        "Be funny",
+        "Say something funny"
+      ],
+      "responses": [
+        "Why couldn’t the bicycle stand up by itself? It was two tired!",
+        "Parallel lines have so much in common. It’s a shame they’ll never meet.",
+        "Why did the math book look sad? Because it had too many problems."
+      ]
+    },
+    {
+      "tag": "weather",
+      "patterns": [
+        "What's the weather today?",
+        "Is it sunny outside?",
+        "Will it rain?",
+        "Tell me about the weather",
+        "What's the forecast?"
+      ],
+      "responses": [
+        "I can help you find the weather! Let me know your location.",
+        "It depends on where you are. Ask me to browse for weather updates if you'd like!"
+      ]
+    },
+    {
+      "tag": "filter_preferences",
+      "patterns": [
+        "What filters do I have?",
+        "Tell me about my filters",
+        "What categories can I choose from?"
+      ],
+      "responses": [
+        "Your filters include: Python, Animation, Football, Machine Learning, Fantasy, Musical, Other, and Tutorial.",
+        "The available categories you've set are: Python, Animation, Football, Machine Learning, Fantasy, Musical, Other, and Tutorial."
+      ]
+    },
+    {
+      "tag": "hobbies",
+      "patterns": [
+        "What hobbies can you suggest?",
+        "Tell me some cool hobbies",
+        "What are fun things to do?",
+        "Any hobby ideas?"
+      ],
+      "responses": [
+        "How about photography? It’s a great way to capture and appreciate beauty.",
+        "Try learning a musical instrument. Guitar or piano, perhaps?",
+        "Coding can be both a hobby and a career skill!",
+        "Fantasy football or writing could be a fun outlet for your creativity."
+      ]
+    },
+    {
+      "tag": "motivation",
+      "patterns": [
+        "I need motivation",
+        "Can you inspire me?",
+        "Tell me something motivational",
+        "I'm feeling down"
+      ],
+      "responses": [
+        "Remember: 'The only limit to our realization of tomorrow is our doubts of today.' - Franklin D. Roosevelt",
+        "Don’t watch the clock; do what it does. Keep going.",
+        "Success is not final, failure is not fatal: it is the courage to continue that counts."
+      ]
+    },
+    {
+      "tag": "programming_help",
+      "patterns": [
+        "I need help with Python",
+        "Can you explain a coding concept?",
+        "How do I solve this bug?",
+        "Any tips for learning programming?"
+      ],
+      "responses": [
+        "Sure! What’s the specific issue you're facing with Python?",
+        "Practice makes perfect! Try coding every day and building small projects.",
+        "Debugging is an essential skill. Break your code into smaller parts and test each section!"
+      ]
+    },
+    {
+      "tag": "sports",
+      "patterns": [
+        "Tell me about football",
+        "Who won the last game?",
+        "What's your favorite sport?",
+        "Do you follow any sports?"
+      ],
+      "responses": [
+        "Football is exciting! It’s also known as soccer in some countries.",
+        "I don’t have personal favorites, but I can help you find scores or updates!",
+        "Sports can be a great way to connect with people and stay active!"
+      ]
+    }
+  ]
+}
